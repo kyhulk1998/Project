@@ -1,0 +1,21 @@
+<component name="InspectionProjectProfileManager">
+  <profile version="1.0">
+    <option name="myName" value="Project Default" />
+    <inspection_tool class="PyPep8Inspection" enabled="false" level="WEAK WARNING" enabled_by_default="false" />
+    <inspection_tool class="PyUnresolvedReferencesInspection" enabled="true" level="WARNING" enabled_by_default="true">
+      <option name="ignoredIdentifiers">
+        <list>
+          <option value="First_Google.quickstart.drive_service" />
+          <option value="DriveAPI.views.__future__" />
+          <option value="DriveAPI.views.typing" />
+          <option value="DriveAPI.views.cryptography" />
+          <option value="ttk" />
+          <option value="demo.pypdfocr" />
+          <option value="os" />
+          <option value="sys" />
+          <option value="manage.ImportError" />
+        </list>
+      </option>
+    </inspection_tool>
+  </profile>
+</component>

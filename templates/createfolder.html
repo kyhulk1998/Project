@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% block title %}
+    CreateFolder
+{% endblock %}
+
+{% block content %}
+    <div class="container d-inline-flex">
+        <div class="card mt-5">
+            <div class="card-body">
+                <center>
+                    <h2>We are design your cloud. Please wait for seconds.</h2>
+                    <form action="{% url 'create' %}" method="post" name="create">
+                        {% csrf_token %}
+                    </form>
+                </center>
+            </div>
+        </div>
+
+    </div>
+    <script type="text/javascript">
+        setTimeout(function () {
+            window.location.href = "/profile";
+        }, 10000);
+        window.onload = function () {
+            document.forms['create'].submit();
+        }
+    </script>
+
+{% endblock %}

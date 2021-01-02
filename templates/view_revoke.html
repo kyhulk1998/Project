@@ -1,0 +1,93 @@
+{% extends 'baseprofile.html' %}
+{% block title %}
+    Revoke File
+{% endblock %}
+
+{% block content %}
+     Offline
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card ">
+                <div class="card-header">
+                    <h4 class="card-title">Offline</h4>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table tablesorter">
+                            <thead class="text-primary">
+                            <tr>
+                                <th>Downloader</th>
+                                <th>Download At</th>
+                                <th class="text-center">Revoke</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+
+                            {% for row in data1 %}
+                                <tr>
+                                    <td>{{ row.downloader }}</td>
+                                    <td>{{ row.date_create }}</td>
+                                    <td class="text-center">
+                                        <form method="POST" action="{% url 'revoke' %}">
+                                            {% csrf_token %}
+                                            <input type="hidden" name="filedel" value={{ row.licenseID }}>
+                                            <button type="submit" class="btn btn-danger btn-sm" title="Revoke">
+                                                <i class="fa fa-trash"></i></button>
+                                        </form>
+                                    </td>
+                                </tr>
+                            {% endfor %}
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {# Online #}
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card ">
+                <div class="card-header">
+                    <h4 class="card-title">Online</h4>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table tablesorter">
+                            <thead class="text-primary">
+                            <tr>
+                                <th>Share to</th>
+                                <th>Date</th>
+                                <th class="text-center">Revoke</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+
+                            {% for row in data %}
+                                <tr>
+                                    <td>{{ row.shareEmails }}</td>
+                                    <td>{{ row.date_create }}</td>
+                                    <td class="text-center">
+                                        <form method="POST" action="{% url 'revoKe' %}">
+                                            {% csrf_token %}
+                                            <input type="hidden" name="filedel" value={{ row.shareFileID }}>
+                                            <button type="submit" class="btn btn-danger btn-sm" title="Revoke">
+                                                <i class="fa fa-trash"></i></button>
+                                        </form>
+                                    </td>
+                                </tr>
+                            {% endfor %}
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
+
+

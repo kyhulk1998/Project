@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% block title %} LoginPage {% endblock %}
+{% block content %}
+<div class="container">
+    <center>
+        <div class="card mt-4" style="width: 40rem;">
+            <div class="card-body">
+                <center>
+                    <form method="post">
+                        {% csrf_token %}
+                        {{ form }}
+                        <div class="form-check">
+                            <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                            <label class="form-check-label" for="exampleCheck1">Remember me</label>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Login</button>
+                    </form>
+                </center>
+            </div>
+        </div>
+    </center>
+</div>
+{% endblock %}

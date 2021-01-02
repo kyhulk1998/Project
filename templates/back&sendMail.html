@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% block title %} ShareSuccess {% endblock %}
+{% block content %}
+<script>
+    submitForms = function()
+    {
+    document.getElementById("form1").submit();
+    document.getElementById("form2").submit();
+    }
+
+</script>
+
+<form method="POST" action="{% url 'back' %}" id="form1">
+    {% csrf_token %}
+</form>
+
+<form method="POST" action="{% url 'sendmail' %}" id="form2">
+    {% csrf_token %}
+</form>
+<div class="container">
+    <div class="card mt-4">
+        <div class="card-body">
+            <center>
+                <h3> File's shared-link is generated and being sent. Click the button below to return to your dashboard.</h3>
+                <button type="submit" class="btn btn-primary btn-lg" onclick="submitForms()">Return to Dashboard</button>
+            </center>
+
+        </div>
+    </div>
+</div>
+
+{% endblock %}

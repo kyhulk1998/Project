@@ -1,0 +1,168 @@
+{% extends 'baseprofile.html' %}
+{% load static %}
+{% block title %}
+    Dashboard
+{% endblock %}
+
+{% block content %}
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card ">
+                <div class="card-header">
+                    <h4 class="card-title">Dashboard</h4>
+                </div>
+                <div class="card-body">
+                    <div class="container">
+                        <form action="{% url 'upload' %}" method="post">
+                            {% csrf_token %}
+                            <center>
+                                <form>
+                                    <div class="custom-file">
+                                        <input type="file" class="custom-file-input" id="customFile" name="fileupload">
+                                        <label class="custom-file-label" for="customFile">Choose file</label>
+                                    </div>
+                                </form>
+                                <button type="submit" class="btn btn-info btn-sm">Upload</button>
+                            </center>
+
+                        </form>
+                    </div>
+                    <div class="table-responsive">
+                        <table class="table tablesorter">
+                            <thead class="text-primary">
+                            <tr>
+                                <th>Name</th>
+                                <th class="text-center">Actions</th>
+                                <th class="text-center">Delete</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% for item in files %}
+                                <tr>
+                                    <td>{{ item.name }}</td>
+
+                                    <div class="btn-group text-center">
+                                        <td class="text-center">
+                                            <div class="btn-group">
+                                                <form method="POST" action="{% url 'viewowner' %}">
+                                                    {% csrf_token %}
+                                                    <input type="hidden" name="fileview" value={{ item.id }}>
+                                                    <input type="hidden" name="name" value={{ item.name }}>
+                                                    <button type="submit" class="btn btn-info btn-sm"
+                                                            title="View"><i
+                                                            class="fa fa-eye"></i>
+                                                    </button>
+                                                </form>
+                                            </div>
+
+                                            <div class="btn-group">
+                                                <form method="POST" action="{% url 'viewDetail' %}">
+                                                    {% csrf_token %}
+                                                    <input type="hidden" name="filedetail" value={{ item.id }}>
+                                                    <input type="hidden" name="name" value={{ item.name }}>
+                                                    <button type="submit" class="btn btn-success btn-sm"
+                                                            title="Detail"><i
+                                                            class="fa fa-book"></i>
+                                                    </button>
+                                                </form>
+                                            </div>
+
+                                            <div class="btn-group">
+                                                <form method="POST" action="{% url 'downloadInProfile' %}">
+                                                    {% csrf_token %}
+                                                    <input type="hidden" name="filedown" value={{ item.id }}>
+                                                    <input type="hidden" name="name" value={{ item.name }}>
+                                                    <button type="submit" class="btn btn-primary btn-sm"
+                                                            title="Download"><i class="fa fa-arrow-circle-down"></i>
+                                                    </button>
+                                                </form>
+                                            </div>
+
+                                            <div class="btn-group">
+                                                <form method="POST" action="{% url 'view_revoke' %}">
+                                                    {% csrf_token %}
+                                                    <input type="hidden" name="file_id" value="{{ item.id }}">
+                                                    <input type="hidden" name="name" value={{ item.name }}>
+                                                    <button type="submit" class="btn btn-danger btn-sm" title="Revoke">
+                                                        <i class="fa fa-address-book"></i></button>
+                                                </form>
+                                            </div>
+
+                                            <div class="btn-group">
+                                                <form method="POST" action="{% url 'cr' %}">
+                                                    {% csrf_token %}
+                                                    <input hidden type="text" name="fileid" value="{{ item.id }}">
+                                                    <button type="submit" class="btn btn-info btn-sm" title="Share">
+                                                        <i class="fa fa-share"></i></button>
+                                                </form>
+                                            </div>
+                                        </td>
+                                    </div>
+
+                                    <td class="text-center">
+                                        <form method="POST" action="{% url 'delete' %}">
+                                            {% csrf_token %}
+                                            <input type="hidden" name="filedel" value={{ item.id }}>
+                                            <button type="submit" class="btn btn-danger btn-sm" title="Delete">
+                                                <i class="fa fa-trash"></i></button>
+                                        </form>
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="detailmodal" tabindex="-1" role="dialog" aria-labelledby="detailmodal_Label"
+         aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="detailmodal_Label">
+                        <center>Confirmation</center>
+                    </h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <table border='1'>
+                        <thead>
+                        <tr>
+                            <th>Size</th>
+                            <th>Created Time</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td>{{ size }}</td>
+                            <td>{{ createdTime }}</td>
+                        </tr>
+                        </tbody>
+                    </table>
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Add the following code if you want the name of the file appear on select
+        $(".custom-file-input").on("change", function () {
+            var fileName = $(this).val().split("\\").pop();
+            $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
+        });
+
+    </script>
+
+
+
+{% endblock %}

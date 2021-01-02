@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{% block title %} ViewFileShare {% endblock %}
+{% block content %}
+<form method="POST" action="{% url 'viewsharefile' %}">
+    {% csrf_token %}
+    <div class="container">
+        <div class="card mt-4">
+            <div class="card-body">
+                <h3>Please Click "Verify" To View File Share</h3>
+                <input hidden type="text" name="shareid" value={{ id }}>
+                <p></p>
+                <button type="submit" class="btn btn-primary btn-lg btn-block">Verify</button>
+            </div>
+        </div>
+    </div>
+
+</form>
+
+{% endblock %}

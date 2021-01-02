@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% block title %}
+    Redirecting...
+{% endblock %}
+
+{% block content %}
+    <div class="container-fluid mt-5">
+        <center>
+            <iframe src='https://www.teenkitchenproject.org/site/wp-content/plugins/fundlycrm/assets/images/npe-redirecting.gif'
+                    frameborder='0' scrolling='no'
+                    allowfullscreen width='640' height='423'></iframe>
+        </center>
+        <form action="{% url 'returnshare' %}" method="post" name="return">
+            {% csrf_token %}
+            <input type="hidden" name="shareid" value={{ id }}>
+        </form>
+    </div>
+
+    <script type="text/javascript">
+        window.onload = function () {
+            document.forms['return'].submit();
+        }
+    </script>
+{% endblock %}

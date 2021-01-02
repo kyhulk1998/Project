@@ -1,0 +1,71 @@
+{% extends 'baseprofile.html' %}
+{% block title %} Share {% endblock %}
+{% block content %}
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card ">
+                    <div class="card-header">
+                        <h4 class="card-title">Dashboard</h4>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table tablesorter">
+                                <thead class="text-primary">
+                                <tr>
+                                    <th>Name</th>
+                                    <th class="text-center">Permission</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr>
+                                    <td><b><h5>{{ name }}</h5></b></td>
+
+                                    <td>
+                                        <form method="POST" action="{% url 'createLink' %}">
+                                            {% csrf_token %}
+                                            <input hidden type="text" name="filid" value={{ id }}>
+                                            <input hidden type="text" name="filname" value={{ name }}>
+
+
+                                            <div class="field">
+                                                <label class="label"><b>Email</b></label>
+                                                {{ form.shareEmails }}
+                                            </div>
+                                            <p></p>
+                                            <center><h2>Permission</h2></center>
+
+                                            <div class="field">
+                                                <label class="label"><b>Editable</b></label>
+                                                {{ form.editable }}
+                                            </div>
+                                            <p></p>
+                                            <div class="field">
+                                                <label class="label"><b>Printable</b></label>
+                                                {{ form.printable }}
+                                            </div>
+                                            <p></p>
+                                            <div class="field">
+                                                <label class="label"><b>Downloadable</b></label>
+                                                {{ form.downloadable }}
+                                            </div>
+                                            <div class="field">
+                                                <label class="label"><b>Expire Date</b></label><br>
+                                                <input type="datetime-local" name="expDate">
+                                            </div>
+                                            <input type="hidden" name="id" value={{ fileid }}>
+                                            <p></p>
+                                            <button type="submit" class="btn btn-primary btn-lg btn-block">Share
+                                            </button>
+                                        </form>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
